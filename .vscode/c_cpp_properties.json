@@ -1,0 +1,35 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${HOME}/Arduino/libraries/**",
+                "${HOME}/.arduino15/packages/esp8266/hardware/esp8266/2.4.2/cores/esp8266",
+                "${HOME}/.arduino15/packages/esp8266/hardware/esp8266/2.4.2/tools/sdk/include",
+                "${HOME}/.arduino15/packages/esp8266/hardware/esp8266/2.4.2/tools/sdk/lwip2/include",
+                "${HOME}/.arduino15/packages/esp8266/hardware/esp8266/2.4.2/variants/d1_mini",
+                "${HOME}/.arduino15/packages/esp8266/hardware/esp8266/2.4.2/libraries/ESP8266WiFi/src",
+                "${HOME}/.arduino15/packages/esp8266/hardware/esp8266/2.4.2/libraries/**"
+            ],
+            "defines": [
+                "F_CPU=80000000L",
+                "LWIP_OPEN_SRC",
+                "TCP_MSS=536",
+                "ARDUINO=10605",
+                "ARDUINO_ESP8266_WEMOS_D1MINI",
+                "ARDUINO_ARCH_ESP8266",
+                "DARDUINO_BOARD=\"ESP8266_WEMOS_D1MINI\"",
+                "ESP8266"
+            ],
+            "compilerPath": "/usr/bin/clang",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "clang-x64",
+            "forcedInclude": [
+                "${HOME}/.arduino15/packages/esp8266/hardware/esp8266/2.4.2/cores/esp8266/Arduino.h"
+            ]
+        }
+    ],
+    "version": 4
+}
