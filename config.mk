@@ -4,6 +4,7 @@ MONITOR_SPEED=115200
 FLASH_DEF=4M3M
 CFLAGS += -O3
 ESP_ADDR=KAMSTRUP
+EXCLUDE_DIRS=./pctest
 
 monitor:
 	picocom --baud $(MONITOR_SPEED) $(UPLOAD_PORT) --imap lfcrlf --echo
