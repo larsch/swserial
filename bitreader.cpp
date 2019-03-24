@@ -1,6 +1,6 @@
 // Copyright (C) Lars Christensen
 
-#include "bitreader.hpp"
+#include "bitreader.h"
 
 void BitReader::edge(uint32_t time, int level)
 {

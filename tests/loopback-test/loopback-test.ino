@@ -4,10 +4,10 @@
 #define TX_PIN D6
 
 #include "fifo.h"
-#include "lfsr.hpp"
+#include "lfsr.h"
 
 #ifdef USE_SWSERIAL
-#include "swserial.hpp"
+#include "swserial.h"
 SwSerial swSerial(RX_PIN, TX_PIN);
 #endif
 

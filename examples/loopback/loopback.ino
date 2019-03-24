@@ -9,7 +9,7 @@
 #define BAUD 9600
 
 #ifdef USE_SWSERIAL
-#include "swserial.hpp"
+#include "swserial.h"
 SwSerial swSerial(RX, TX);
 #endif
 

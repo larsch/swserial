@@ -1,7 +1,7 @@
 // Copyright (C) Lars Christensen
 
-#ifndef _test_hpp_
-#define _test_hpp_
+#ifndef _test_h_
+#define _test_h_
 
 #include <list>
 
@@ -52,4 +52,4 @@ void assert_equal_f(const T &expected, const S &given, const char *file,
 #define assert(expr) \
   assert_equal_f(true, (expr), __FILE__, __LINE__)
 
-#endif // _test_hpp_
+#endif // _test_h_

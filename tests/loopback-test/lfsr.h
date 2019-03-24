@@ -1,7 +1,7 @@
 // Copyright (C) Lars Christensen
 
-#ifndef _lfsr_hpp_
-#define _lfsr_hpp_
+#ifndef _lfsr_h_
+#define _lfsr_h_
 
 template <typename T, T mask> struct lfsr {
   lfsr(T init = 1) : reg(init) {}
@@ -18,5 +18,5 @@ template <typename T, T mask> struct lfsr {
 
 typedef lfsr<uint16_t, 0xb400> lfsr16;
 
-#endif // _lfsr_hpp_
+#endif // _lfsr_h_
 

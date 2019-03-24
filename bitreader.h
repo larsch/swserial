@@ -1,7 +1,7 @@
 // Copyright (C) Lars Christensen
 
-#ifndef _bitreader_hpp_
-#define _bitreader_hpp_
+#ifndef _bitreader_h_
+#define _bitreader_h_
 
 #include "fifo.h"
 #include <cstdint>
@@ -53,4 +53,4 @@ private:
   uint8_t current = 0;
 };
 
-#endif // _bitreader_hpp_
+#endif // _bitreader_h_

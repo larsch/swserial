@@ -1,5 +1,5 @@
-#include "bitreader.hpp"
-#include "test.hpp"
+#include "bitreader.h"
+#include "test.h"
 
 #include <random>
 

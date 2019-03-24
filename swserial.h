@@ -1,9 +1,9 @@
 // Copyright (C) Lars Christensen
 
-#ifndef _swserial_hpp_
-#define _swserial_hpp_
+#ifndef _swserial_h_
+#define _swserial_h_
 
-#include "bitreader.hpp"
+#include "bitreader.h"
 #include "Arduino.h"
 
 class SwSerial : Stream
@@ -24,4 +24,4 @@ private:
   unsigned int bit_length;
 };
 
-#endif // _swserial_hpp_
+#endif // _swserial_h_

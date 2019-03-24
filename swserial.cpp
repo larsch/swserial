@@ -1,6 +1,6 @@
 // Copyright (C) Lars Christensen
 
-#include "swserial.hpp"
+#include "swserial.h"
 
 #if defined(ARDUINO_ARCH_ESP8266)
 #define CYCLE_FREQ (ESP.getCpuFreqMHz() * 1000000)
