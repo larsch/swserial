@@ -3,7 +3,7 @@
 #include "swserial.hpp"
 
 #if defined(ARDUINO_ARCH_ESP8266)
-#define CYCLE_FREQ (ESP.getCpuFreqMHz()*1000000)
+#define CYCLE_FREQ (ESP.getCpuFreqMHz() * 1000000)
 #define CYCLE_UFREQ ESP.getCpuFreqMHz()
 #define CYCLE_COUNT ESP.getCycleCount()
 #endif

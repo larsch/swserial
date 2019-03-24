@@ -1,12 +1,20 @@
+// Software Serial loopback test
+
 #define RX_PIN D5
 #define TX_PIN D6
 
-#include "bitreader.hpp"
 #include "fifo.h"
-#include "swserial.hpp"
 #include "lfsr.hpp"
 
+#ifdef USE_SWSERIAL
+#include "swserial.hpp"
 SwSerial swSerial(RX_PIN, TX_PIN);
+#endif
+
+#ifdef USE_SOFTWARESERIAL
+#include "SoftwareSerial.h"
+SoftwareSerial swSerial(RX_PIN, TX_PIN);
+#endif
 
 /** Number of bytes in error rate test */
 #define TEST_BYTES 16384

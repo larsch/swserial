@@ -3,13 +3,20 @@
 // Tests sending a byte and expects to receive same byte. TX pin must be
 // connected directly to RX pin.
 
-#include "swserial.hpp"
 
 #define RX D5
 #define TX D6
 #define BAUD 9600
 
+#ifdef USE_SWSERIAL
+#include "swserial.hpp"
 SwSerial swSerial(RX, TX);
+#endif
+
+#ifdef USE_SOFTWARESERIAL
+#include "SoftwareSerial.h"
+SoftwareSerial swSerial(RX, TX);
+#endif
 
 void setup()
 {
@@ -19,7 +26,7 @@ void setup()
 
 void loop()
 {
-  static uint8_t currentByte = 0x00;
+  static uint8_t currentByte = 0xee;
 
   swSerial.write(currentByte);
   Serial.print("Wrote ");
@@ -33,9 +40,13 @@ void loop()
     }
   }
 
-  static uint8_t readByte = swSerial.read();
-  Serial.print(", got back ");
-  Serial.println(readByte, 16);
+  while (swSerial.available()) {
+    uint8_t readByte = swSerial.read();
+    Serial.print(", got back ");
+    Serial.print(readByte, 16);
+  }
+
+  Serial.println();
 
   delay(500);
 
