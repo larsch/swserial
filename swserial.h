@@ -22,6 +22,7 @@ private:
   void rx();
   int txPin;
   unsigned int bit_length;
+  uint32_t stopbit_edge_time = 0;
 };
 
 #endif // _swserial_h_

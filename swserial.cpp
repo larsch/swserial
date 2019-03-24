@@ -77,15 +77,23 @@ size_t SwSerial::write(uint8_t b)
 {
   rx();
   uint32_t clock = CYCLE_COUNT;
+  if (stopbit_edge_time - clock < bit_length) {
+    // wait until stop bit is complete
+    delayUntil(stopbit_edge_time);
+    clock = stopbit_edge_time;
+  }
+  // start bit
   digitalWrite(txPin, LOW);
   for (int i = 0; i < 8; ++i) {
+    // data bit
     delayUntil(clock += bit_length);
     digitalWrite(txPin, b & 1);
     b >>= 1;
   }
   delayUntil(clock += bit_length);
+  // stop bit
   digitalWrite(txPin, HIGH);
-  delayUntil(clock += bit_length);
+  stopbit_edge_time = clock + bit_length;
   return 1;
 }
 
