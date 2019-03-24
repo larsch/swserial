@@ -46,8 +46,7 @@ void SwSerial::begin(int baud)
 {
   auto freq = CYCLE_FREQ;
   bit_length = freq / baud;
-  br = BitReader(bit_length);
-  // bit_lengthFraction = freq % baud;
+  br.setBitLength(bit_length);
 }
 
 int SwSerial::available()

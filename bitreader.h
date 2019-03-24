@@ -23,6 +23,13 @@ public:
   BitReader(unsigned int bitlen = 100) : bit_length(bitlen) {}
 
   /**
+   * @brief Set bit length
+   *
+   * @param bitlen New bit length
+   */
+  void setBitLength(int bitlen) { bit_length = bitlen; }
+
+  /**
    * @brief Handle bit edge
    *
    * Called when an edge is detected with the current timestamp.
