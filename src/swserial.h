@@ -6,23 +6,23 @@
 #include "bitreader.h"
 #include "Arduino.h"
 
-class SwSerial : Stream
+class SwSerial : public Stream, private BitReader
 {
 public:
-  BitReader br;
   SwSerial(int rx, int tx);
-  void begin(int baud);
+  void begin(int baud, SerialConfig config = SERIAL_8N1);
 
   virtual int available();
   virtual int read();
   virtual int peek();
   virtual size_t write(uint8_t b);
+  using Stream::write;
 
 private:
   void rx();
   int txPin;
-  unsigned int bit_length;
   uint32_t stopbit_edge_time = 0;
+  int stopbits;
 };
 
 #endif // _swserial_h_

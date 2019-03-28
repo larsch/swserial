@@ -123,32 +123,32 @@ swserial_test/fast:
 	$(MAKE) -f CMakeFiles/swserial_test.dir/build.make CMakeFiles/swserial_test.dir/build
 .PHONY : swserial_test/fast
 
-home/larsch/prj/swserial/bitreader.o: home/larsch/prj/swserial/bitreader.cpp.o
+home/larsch/prj/swserial/src/bitreader.o: home/larsch/prj/swserial/src/bitreader.cpp.o
 
-.PHONY : home/larsch/prj/swserial/bitreader.o
+.PHONY : home/larsch/prj/swserial/src/bitreader.o
 
 # target to build an object file
-home/larsch/prj/swserial/bitreader.cpp.o:
-	$(MAKE) -f CMakeFiles/swserial_test.dir/build.make CMakeFiles/swserial_test.dir/home/larsch/prj/swserial/bitreader.cpp.o
-.PHONY : home/larsch/prj/swserial/bitreader.cpp.o
+home/larsch/prj/swserial/src/bitreader.cpp.o:
+	$(MAKE) -f CMakeFiles/swserial_test.dir/build.make CMakeFiles/swserial_test.dir/home/larsch/prj/swserial/src/bitreader.cpp.o
+.PHONY : home/larsch/prj/swserial/src/bitreader.cpp.o
 
-home/larsch/prj/swserial/bitreader.i: home/larsch/prj/swserial/bitreader.cpp.i
+home/larsch/prj/swserial/src/bitreader.i: home/larsch/prj/swserial/src/bitreader.cpp.i
 
-.PHONY : home/larsch/prj/swserial/bitreader.i
+.PHONY : home/larsch/prj/swserial/src/bitreader.i
 
 # target to preprocess a source file
-home/larsch/prj/swserial/bitreader.cpp.i:
-	$(MAKE) -f CMakeFiles/swserial_test.dir/build.make CMakeFiles/swserial_test.dir/home/larsch/prj/swserial/bitreader.cpp.i
-.PHONY : home/larsch/prj/swserial/bitreader.cpp.i
+home/larsch/prj/swserial/src/bitreader.cpp.i:
+	$(MAKE) -f CMakeFiles/swserial_test.dir/build.make CMakeFiles/swserial_test.dir/home/larsch/prj/swserial/src/bitreader.cpp.i
+.PHONY : home/larsch/prj/swserial/src/bitreader.cpp.i
 
-home/larsch/prj/swserial/bitreader.s: home/larsch/prj/swserial/bitreader.cpp.s
+home/larsch/prj/swserial/src/bitreader.s: home/larsch/prj/swserial/src/bitreader.cpp.s
 
-.PHONY : home/larsch/prj/swserial/bitreader.s
+.PHONY : home/larsch/prj/swserial/src/bitreader.s
 
 # target to generate assembly for a file
-home/larsch/prj/swserial/bitreader.cpp.s:
-	$(MAKE) -f CMakeFiles/swserial_test.dir/build.make CMakeFiles/swserial_test.dir/home/larsch/prj/swserial/bitreader.cpp.s
-.PHONY : home/larsch/prj/swserial/bitreader.cpp.s
+home/larsch/prj/swserial/src/bitreader.cpp.s:
+	$(MAKE) -f CMakeFiles/swserial_test.dir/build.make CMakeFiles/swserial_test.dir/home/larsch/prj/swserial/src/bitreader.cpp.s
+.PHONY : home/larsch/prj/swserial/src/bitreader.cpp.s
 
 swserial_test.o: swserial_test.cpp.o
 
@@ -186,9 +186,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... swserial_test"
 	@echo "... edit_cache"
-	@echo "... home/larsch/prj/swserial/bitreader.o"
-	@echo "... home/larsch/prj/swserial/bitreader.i"
-	@echo "... home/larsch/prj/swserial/bitreader.s"
+	@echo "... home/larsch/prj/swserial/src/bitreader.o"
+	@echo "... home/larsch/prj/swserial/src/bitreader.i"
+	@echo "... home/larsch/prj/swserial/src/bitreader.s"
 	@echo "... swserial_test.o"
 	@echo "... swserial_test.i"
 	@echo "... swserial_test.s"

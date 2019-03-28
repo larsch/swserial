@@ -8,6 +8,27 @@ static std::default_random_engine rng;
 static auto &rx = br.rx_fifo;
 const int bit_length = 100;
 
+
+uint8_t calc_parity(uint8_t b)
+{
+  return (0x6996 >> ((b ^ (b >> 4)) & 0xF)) & 1;
+}
+
+uint32_t write_bits(BitReader &br, uint32_t time, unsigned int bits, size_t len)
+{
+  int last_level = 2;
+  for (size_t i = 0; i < len; ++i) {
+    int level = bits & 1;
+    if (level != last_level) {
+      br.edge(time, level);
+      last_level = level;
+    }
+    bits >>= 1;
+    time += bit_length;
+  }
+  return time;
+}
+
 void send_byte(uint32_t time, uint8_t b)
 {
   br.edge(time, 0);
@@ -212,8 +233,95 @@ TEST(seq2)
   assert_equal(0x00, rx.get());
 }
 
+TEST(parity_even)
+{
+  br.begin(8, 'E');
+  br.edge(0, 0);
+  br.edge(1000, 1);
+  assert(!rx.empty());
+  assert_equal(0x00, rx.get());
+  assert(rx.empty());
+  br.edge(2000, 0);
+  assert(rx.empty());
+  br.edge(2900, 1); // incorrect parity bit
+  assert(rx.empty());
+  br.check(3100);
+  assert(rx.empty());
+}
+
+TEST(parity_odd)
+{
+  br.begin(8, 'O');
+  br.edge(0, 0);
+  br.edge(900, 1);
+  br.check(1100);
+  assert(!rx.empty());
+  assert_equal(0x00, rx.get());
+  assert(rx.empty());
+  br.edge(2000, 0);
+  assert(rx.empty());
+  br.edge(3000, 1); // incorrect parity bit
+  assert(rx.empty());
+  br.check(3100);
+  assert(rx.empty());
+}
+
+TEST(databits)
+{
+  BitReader br;
+  static auto &rx = br.rx_fifo;
+
+  for (int databits = 5; databits <= 8; ++databits) {
+    br.begin(databits, 0);
+    uint32_t time = 0;
+    for (int i = 0; i < (1 << databits); ++i) {
+      time = write_bits(br, time, (1 << (databits + 1)) | (i << 1), databits + 2);
+      br.check(time);
+      assert(!rx.empty());
+      assert_equal(i, rx.get());
+    }
+  }
+}
+
+TEST(databits_even_parity)
+{
+  BitReader br;
+  static auto &rx = br.rx_fifo;
+
+  for (int databits = 5; databits <= 8; ++databits) {
+    br.begin(databits, 'E');
+    uint32_t time = 0;
+    for (int i = 0; i < (1 << databits); ++i) {
+      auto parity_bit = calc_parity(i);
+      time = write_bits(br, time, (1 << (databits + 2)) | (parity_bit << (databits + 1)) | (i << 1), databits + 3);
+      br.check(time);
+      assert(!rx.empty());
+      assert_equal(i, rx.get());
+    }
+  }
+}
+
+TEST(databits_odd_parity)
+{
+  BitReader br;
+  static auto &rx = br.rx_fifo;
+
+  for (int databits = 5; databits <= 8; ++databits) {
+    br.begin(databits, 'O');
+    uint32_t time = 0;
+    for (int i = 0; i < (1 << databits); ++i) {
+      auto parity_bit = calc_parity(i) ^ 1;
+      time = write_bits(br, time, (1 << (databits + 2)) | (parity_bit << (databits + 1)) | (i << 1), databits + 3);
+      br.check(time);
+      assert(!rx.empty());
+      assert_equal(i, rx.get());
+    }
+  }
+}
+
 int main()
 {
+  // databits_even_parity();
   for (auto fn : tests)
     fn();
   std::cout << failed << " failed, " << passed << " passed" << std::endl;

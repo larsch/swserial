@@ -49,15 +49,31 @@ public:
 
   FIFO<uint8_t, 32> rx_fifo;
 
-private:
-  /** Number of known bits, including start bit */
-  unsigned int bitcount = 0;
+  void begin(int data, char par)
+  {
+    databits = data;
+    parity = par;
+    parity_odd = (par == 'O' ? 1 : 0);
+    expected_bits = 1 + databits + !!par;
+  }
+
+protected:
+  void output(uint32_t result);
+
   /** Bit length */
   unsigned int bit_length;
+  /** Expected number of bits, including start & parity */
+  uint8_t expected_bits = 9;
+  /** Number of known bits, including start bit */
+  unsigned int bitcount = 0;
   /** Timestamp of last edge */
   uint32_t last_edge_time = 0;
-  /** Current byte */
-  uint8_t current = 0;
+  /** Current byte & parity (in MSB) */
+  unsigned int current = 0;
+
+  unsigned int databits = 8;
+  unsigned int parity = 0;
+  unsigned int parity_odd = 0;
 };
 
 #endif // _bitreader_h_

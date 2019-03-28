@@ -3,7 +3,6 @@
 // Tests sending a byte and expects to receive same byte. TX pin must be
 // connected directly to RX pin.
 
-
 #define RX D5
 #define TX D6
 #define BAUD 9600
@@ -21,12 +20,12 @@ SoftwareSerial swSerial(RX, TX);
 void setup()
 {
   Serial.begin(115200);
-  swSerial.begin(BAUD);
+  swSerial.begin(BAUD, SERIAL_5E1);
 }
 
 void loop()
 {
-  static uint8_t currentByte = 0xee;
+  static uint8_t currentByte = 0x00;
 
   swSerial.write(currentByte);
   Serial.print("Wrote ");
