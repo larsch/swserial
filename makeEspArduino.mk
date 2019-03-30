@@ -289,8 +289,11 @@ ifneq ($(FLASH_INFO),)
 endif
 	perl -e 'print "Build complete. Elapsed time: ", time()-$(START_TIME),  " seconds\n\n"'
 
-upload flash: all
+.flashed: $(MAIN_EXE)
 	$(UPLOAD_COM)
+	touch .flashed
+
+upload flash: .flashed
 
 ota: all
 	$(OTA_TOOL) -r -i $(ESP_ADDR) -p $(ESP_PORT) -a $(ESP_PWD) -f $(MAIN_EXE)

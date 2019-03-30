@@ -8,7 +8,6 @@ static std::default_random_engine rng;
 static auto &rx = br.rx_fifo;
 const int bit_length = 100;
 
-
 uint8_t calc_parity(uint8_t b)
 {
   return (0x6996 >> ((b ^ (b >> 4)) & 0xF)) & 1;
@@ -275,7 +274,8 @@ TEST(databits)
     br.begin(databits, 0);
     uint32_t time = 0;
     for (int i = 0; i < (1 << databits); ++i) {
-      time = write_bits(br, time, (1 << (databits + 1)) | (i << 1), databits + 2);
+      time =
+          write_bits(br, time, (1 << (databits + 1)) | (i << 1), databits + 2);
       br.check(time);
       assert(!rx.empty());
       assert_equal(i, rx.get());
@@ -293,7 +293,10 @@ TEST(databits_even_parity)
     uint32_t time = 0;
     for (int i = 0; i < (1 << databits); ++i) {
       auto parity_bit = calc_parity(i);
-      time = write_bits(br, time, (1 << (databits + 2)) | (parity_bit << (databits + 1)) | (i << 1), databits + 3);
+      time = write_bits(br, time,
+                        (1 << (databits + 2)) | (parity_bit << (databits + 1)) |
+                            (i << 1),
+                        databits + 3);
       br.check(time);
       assert(!rx.empty());
       assert_equal(i, rx.get());
@@ -311,12 +314,29 @@ TEST(databits_odd_parity)
     uint32_t time = 0;
     for (int i = 0; i < (1 << databits); ++i) {
       auto parity_bit = calc_parity(i) ^ 1;
-      time = write_bits(br, time, (1 << (databits + 2)) | (parity_bit << (databits + 1)) | (i << 1), databits + 3);
+      time = write_bits(br, time,
+                        (1 << (databits + 2)) | (parity_bit << (databits + 1)) |
+                            (i << 1),
+                        databits + 3);
       br.check(time);
       assert(!rx.empty());
       assert_equal(i, rx.get());
     }
   }
+}
+
+TEST(shortpulse)
+{
+  br.begin(8, 0);
+  br.edge(0, 0);
+  br.edge(10, 1);
+  br.edge(100, 0);
+  br.edge(110, 1);
+  br.edge(200, 0);
+  br.edge(210, 1);
+  br.check(1000);
+  br.check(2000);
+  assert(rx.empty());
 }
 
 int main()

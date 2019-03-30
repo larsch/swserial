@@ -33,6 +33,11 @@ void BitReader::edge(uint32_t time, int level)
     // bits since last edge (rounded)
     uint32_t bits = (delta + bit_length / 2) / bit_length;
 
+    if (bits == 0 && bitcount == 1 && level == 1) {
+      bitcount = 0;
+      return;
+    }
+
     // repeat previous bit if interval was greater than 1 bit
     if (bits > 1) {
       int interrim_bits = bits - 1;

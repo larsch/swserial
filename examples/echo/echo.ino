@@ -4,7 +4,7 @@
 
 #define RX D5
 #define TX D6
-#define BAUD 9600
+#define BAUD 300
 
 #include "swserial.h"
 SwSerial swSerial(RX, TX);
@@ -12,14 +12,15 @@ SwSerial swSerial(RX, TX);
 void setup()
 {
   Serial.begin(115200);
-  Serial.println("relay.ino");
+  Serial.println("echo.ino");
   swSerial.begin(BAUD);
 }
 
 void loop()
 {
-  if (Serial.available())
-    swSerial.write(Serial.read());
-  if (swSerial.available())
-    Serial.write(swSerial.read());
+  if (swSerial.available()) {
+    uint8_t b = swSerial.read();
+    swSerial.write(b);
+    Serial.write(b);
+  }
 }
