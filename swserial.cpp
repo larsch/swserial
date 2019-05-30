@@ -173,6 +173,15 @@ void SwSerial::begin(int baud, SerialConfig config)
     break;
   }
 
+  Serial.print("bitlength ");
+  Serial.print(bit_length);
+  Serial.print(" databits ");
+  Serial.print(databits);
+  Serial.print(" parity ");
+  Serial.print(parity ? parity : 'N');
+  Serial.print(" stopbits ");
+  Serial.println(stopbits);
+
   BitReader::begin(databits, parity);
 }
 
